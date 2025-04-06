@@ -163,8 +163,8 @@ function parseNumberFromString(value) {
  *   3,3,3   => 5.196152422706632
  *   1,2,3   => 3.741657386773941
  */
-function getParallelepipedDiagonal(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getParallelepipedDiagonal(a, b, c) {
+  return Math.sqrt(a ** 2 + b ** 2 + c ** 2);
 }
 
 /**
@@ -184,8 +184,9 @@ function getParallelepipedDiagonal(/* a, b, c */) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const powTen = 10 ** pow;
+  return Math.round(num / powTen) * powTen;
 }
 
 /**
@@ -205,8 +206,16 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  if (n <= 1) return false;
+  if (n === 2) return true;
+  if (n % 2 === 0) return false;
+
+  const sqrt = Math.sqrt(n);
+  for (let i = 3; i <= sqrt; i += 2) {
+    if (n % i === 0) return false;
+  }
+  return true;
 }
 
 /**
@@ -224,8 +233,8 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  return Number.isNaN(Number(value)) || value === null ? def : value;
 }
 
 /**
@@ -239,8 +248,8 @@ function toNumber(/* value, def */) {
  *   -2 => -8
  *   0  => 0
  */
-function getCube(/* num */) {
-  throw new Error('Not implemented');
+function getCube(num) {
+  return num ** 3;
 }
 
 /**
@@ -256,8 +265,18 @@ function getCube(/* num */) {
  *   3  => 2
  *   10 => 55
  */
-function getFibonacciNumber(/* index */) {
-  throw new Error('Not implemented');
+function getFibonacciNumber(index) {
+  if (index < 0) return undefined;
+  if (index === 0) return 0;
+  if (index === 1) return 1;
+
+  let a = 0;
+  let b = 1;
+  for (let i = 2; i <= index; i += 1) {
+    [a, b] = [b, a + b];
+  }
+
+  return b;
 }
 
 /**
@@ -271,8 +290,10 @@ function getFibonacciNumber(/* index */) {
  *   10 => 55 // (1+2+3+...+10)
  *   1  => 1
  */
-function getSumToN(/* n */) {
-  throw new Error('Not implemented');
+function getSumToN(n) {
+  return Array.from({ length: n }, (_, i) => i + 1).reduce(
+    (acc, current) => acc + current
+  );
 }
 
 /**
